@@ -1,0 +1,17 @@
+.filter {
+  width: 100%;
+}
+
+.home-container {
+  padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .clients-table-container {
+    overflow-x: scroll;
+    .clients-table {
+      width: 1250px;
+      outline: 10px solid transparent;
+    }
+  }
+}

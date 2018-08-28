@@ -1,0 +1,50 @@
+<div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-title>Log In</mat-card-title>
+    <mat-card-content>
+      <form class="form-group" [formGroup]="loginForm" name="loginForm">
+        <div fxLayout="column" fxLayoutGap="15px">
+          <mat-form-field fxFlex>
+            <mat-label> Your email </mat-label>
+            <input matInput type="email" formControlName="email" class="form-control" mdbInputDirective>
+            <mat-error *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">
+              Please provide a valid email
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+              Please provide an email !
+            </mat-error>
+            <mat-error class="has-error" *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').touched">
+              Minimun 6 characters
+            </mat-error>
+            <mat-error class="has-error" *ngIf="loginForm.get('email').hasError('maxlength') && loginForm.get('email').touched">
+              Maximun 6 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex>
+            <mat-label> Your password </mat-label>
+            <input matInput type="password" formControlName="password" class="form-control" mdbInputDirective>
+            <mat-error *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+              Please provide a password
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password').hasError('minlength') && loginForm.get('password').touched">
+              Minimun 6 characters
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched">
+              Maximun 6 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-error *ngIf="error">
+            {{error}}
+          </mat-error>
+
+          <div fxLayout="row" fxLayoutGap="15px">
+            <button mat-raised-button color="primary" (click)="submit(loginForm)">Log In</button>
+            <button mat-raised-button color="primary" (click)="goToRegister()">Register</button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

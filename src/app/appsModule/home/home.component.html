@@ -1,0 +1,68 @@
+<div class="home-container" fxFlexFill fxLayout="column" fxLayoutGap="25px" fxLayoutAlign="start center">
+  <div></div>
+  <h1>Client Administration</h1>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <ng-container *ngIf="dataSource?.data && !loading; else elseNoDataTemplate">
+    <mat-form-field class="filter" *ngIf="dataSource?.data">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutGap="25px" fxFlexFill>
+      <div>
+        <button class="mat-raised-button mat-primary" (click)="addUser()">Add User</button>
+      </div>
+      <div class="clients-table-container">
+        <mat-table matSort [dataSource]="dataSource" class="clients-table mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> ID. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="status">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="date">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Creation date and time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="name">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> First name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="lastName">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Last name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="email">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="actions">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button class="mat-raised-button mat-primary" (click)="editUser(element)">edit</button>
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseNoDataTemplate>
+    <div *ngIf="!loading" fxLayout="column" fxLayoutGap="25px" fxLayoutAlign="center center">
+      <mat-card>
+        <mat-card-title> No data to show ! </mat-card-title>
+      </mat-card>
+      <div>
+        <button class="mat-raised-button mat-primary" (click)="addUser()">Add User</button>
+      </div>
+    </div>
+  </ng-template>
+</div>
