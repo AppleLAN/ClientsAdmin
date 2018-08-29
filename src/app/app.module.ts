@@ -8,9 +8,10 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserAdministrationComponent } from './appsModule/user-administration/user-administration.component';
+import { NotesCreationComponent } from './appsModule/user-administration/notes-creation/notes-creation.component';
 
 @NgModule({
-  declarations: [AppComponent, UserAdministrationComponent],
+  declarations: [AppComponent, UserAdministrationComponent, NotesCreationComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -18,7 +19,7 @@ import { UserAdministrationComponent } from './appsModule/user-administration/us
     SharedModule.forRoot(),
     routing
   ],
-  entryComponents: [UserAdministrationComponent],
+  entryComponents: [UserAdministrationComponent, NotesCreationComponent],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

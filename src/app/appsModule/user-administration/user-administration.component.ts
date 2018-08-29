@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireList } from 'angularfire2/database';
 import { User } from '../../authModule/login/interfaces/user';
 import { ClientsService, ClientStatus } from '../services/clients.service';
-import { checkIfEmpty } from '../../shared/utilities';
+import { checkIfEmptyObject } from '../../shared/utilities';
 import * as moment from 'moment';
 import { UserAuthenticationService } from '../../authModule/login/services/user-authentification.service';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,7 @@ export class UserAdministrationComponent implements OnInit, OnDestroy {
   error: string;
   canDelete = false;
   clientStatus: string[];
+  notes: string[] = [];
 
   private subscriptions: Subscription[] = [];
   private currentUserId: string;
@@ -72,11 +73,12 @@ export class UserAdministrationComponent implements OnInit, OnDestroy {
       ],
       notes: ['', []]
     });
-    if (!checkIfEmpty(this.data)) {
-      const formattedData = {
+    if (!checkIfEmptyObject(this.data)) {
+      const formattedData: User = {
         ...this.data,
         date: moment(this.data.date, 'dddd, MMMM Do YYYY, h:mm:ss a')
-      }
+      };
+      this.notes = this.data.notes;
       this.clientForm.patchValue(formattedData);
       this.canDelete = true;
     }
@@ -106,10 +108,11 @@ export class UserAdministrationComponent implements OnInit, OnDestroy {
       const formattedFormData = {
         ...form.value,
         date: moment(form.value.date).format('dddd, MMMM Do YYYY, h:mm:ss a'),
-        currentUserId: this.currentUserId
+        currentUserId: this.currentUserId,
+        notes: this.notes
       };
 
-      if (!checkIfEmpty(this.data)) {
+      if (!checkIfEmptyObject(this.data)) {
         this.db
           .update(this.data.id, formattedFormData)
           .then(response => {

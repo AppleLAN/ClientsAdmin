@@ -82,10 +82,9 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex>
-        <mat-label> Notes </mat-label>
-        <textarea matInput formControlName="notes" class="form-control" mdbInputDirective></textarea>
-      </mat-form-field>
+      <div fxFlex>
+        <app-notes-creation [(notes)]="notes"></app-notes-creation>
+      </div>
 
       <mat-error *ngIf="error">
         {{error}}

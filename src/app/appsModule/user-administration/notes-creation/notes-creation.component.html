@@ -1,0 +1,22 @@
+<div fxLayout="column" fxLayoutGap="15px">
+  <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center" *ngFor="let note of notes">
+    <div fxFlex>
+      <span>{{note}}</span>
+    </div>
+    <button fxFlex mat-raised-button (click)="remove(note)">remove</button>
+  </div>
+
+  <ng-container *ngIf="showNew; else showNewFalseTemplate">
+    <mat-form-field class="example-full-width">
+      <mat-label> New note </mat-label>
+      <textarea matInput class="form-control" [(ngModel)]="newNote" [required]="true" mdbInputDirective></textarea>
+      <mat-error *ngIf="newNote === ''">
+        Please provide a note
+      </mat-error>
+    </mat-form-field>
+    <button class="mat-raised-button mat-accent" (click)="add()">add</button>
+  </ng-container>
+  <ng-template #showNewFalseTemplate>
+    <button class="mat-raised-button mat-primary" (click)="showNewNotes()">Add new note</button>
+  </ng-template>
+</div>
