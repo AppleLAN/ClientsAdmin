@@ -38,3 +38,7 @@ Firebase is a Google product which offers a lot of features, in this case im usi
 Link to Firebase website : https://clientadministration.firebaseapp.com/login
 
 The main idea is to follow the concepts of a progresive web application delivering a responsive, fast and safe app with short, readable, reusable, functional and declarative code.
+
+## Things missing
+- Unit testing.
+
